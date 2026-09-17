@@ -12,10 +12,11 @@ app.use(express.json());
 // Connect to MongoDB
 console.log('Attempting to connect to MongoDB...');
 mongoose.connect(process.env.MONGODB_URI, {
-  serverSelectionTimeoutMS: 30000, // Increased from 5s to 30s for network latency
-  socketTimeoutMS: 45000,
-  connectTimeoutMS: 30000,
-  maxPoolSize: 10
+  serverSelectionTimeoutMS: 60000, // 60 seconds for server selection
+  socketTimeoutMS: 60000, // 60 seconds for socket operations
+  connectTimeoutMS: 60000, // 60 seconds for initial connection
+  maxPoolSize: 10,
+  retryWrites: true
 })
   .then(() => {
     console.log('✓ Connected to MongoDB!');
